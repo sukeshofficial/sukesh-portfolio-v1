@@ -1,5 +1,7 @@
+import { useEffect, useRef } from "react";
 import { useCountdown } from "../../hooks/useCountdown";
 import { portfolioConfig } from "../../config/portfolio";
+import clockSfx from "../../assets/sfx/clock-sfx.mp3";
 
 const UNITS = [
   { key: "days", label: "DAYS" },
@@ -23,6 +25,40 @@ function pad(n) {
 export default function Countdown() {
   const { days, hours, minutes, seconds } = useCountdown(portfolioConfig.launchDate);
   const values = { days, hours, minutes, seconds };
+  const isRunning = days > 0 || hours > 0 || minutes > 0 || seconds > 0;
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    const audio = new Audio(clockSfx);
+    audio.loop = true;
+    audioRef.current = audio;
+
+    const playAudio = () => {
+      audio.play().catch(() => {
+        // Autoplay policy prevented playback until user interaction
+      });
+    };
+
+    playAudio();
+
+    const handleUserInteraction = () => {
+      if (audio.paused) {
+        playAudio();
+      }
+    };
+
+    window.addEventListener("click", handleUserInteraction);
+    window.addEventListener("keydown", handleUserInteraction);
+
+    return () => {
+      window.removeEventListener("click", handleUserInteraction);
+      window.removeEventListener("keydown", handleUserInteraction);
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [isRunning]);
 
   return (
     <div
