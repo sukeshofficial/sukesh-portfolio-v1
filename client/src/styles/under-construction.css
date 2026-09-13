@@ -1,0 +1,105 @@
+/* =============================================================
+   under-construction.css
+   Clean utility CSS for typography tokens, tabular numbers,
+   and height-aware responsive art-direction modes.
+   ============================================================= */
+
+/* Tabular numbers for live clock and countdown to prevent jitter */
+.uc-tabnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =============================================================
+   HEIGHT-AWARE RESPONSIVE ART-DIRECTION SYSTEM
+   ============================================================= */
+
+/* Mode C: Short-Height Landscape (1366x600, 1280x600, 1024x600, 768x600)
+   Compresses vertical footprints of Hero SVG and Orb Spacer so
+   Status & Countdown sit cleanly below the horizon without overlapping the Orb,
+   and Hero Title SVG sits cleanly below the top header. */
+@media (min-width: 600px) and (max-height: 680px) and (orientation: landscape) {
+  .uc-hero-container {
+    padding-top: 3.5rem !important;
+  }
+
+  .uc-hero-svg {
+    max-height: 13vh !important;
+  }
+
+  .uc-orb-spacer {
+    height: 5vh !important;
+    min-height: 1rem !important;
+    max-height: 3.5rem !important;
+  }
+
+  .uc-status-section {
+    padding-bottom: 0.25rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .uc-status-heading {
+    font-size: 9px !important;
+  }
+
+  .uc-status-desc {
+    font-size: 8px !important;
+    margin-top: 0.2rem !important;
+  }
+
+  .uc-countdown-container {
+    margin-top: 0.35rem !important;
+  }
+}
+
+/* Extremely Short Height Landscape (height <= 550px) */
+@media (min-width: 600px) and (max-height: 550px) and (orientation: landscape) {
+  .uc-hero-container {
+    padding-top: 2.75rem !important;
+  }
+
+  .uc-hero-svg {
+    max-height: 10vh !important;
+  }
+
+  .uc-orb-spacer {
+    height: 3vh !important;
+    min-height: 0.5rem !important;
+  }
+}
+
+/* Portrait Orientation Override (Mobile Portrait mode) */
+@media (max-width: 599px),
+(orientation: portrait) {
+  .uc-hero-container {
+    padding-top: 10vh !important;
+  }
+
+  .uc-orb-spacer {
+    height: 10vh !important;
+    min-height: 2rem !important;
+    max-height: 14vh !important;
+  }
+
+  .uc-status-section {
+    padding-bottom: 4rem !important;
+    /* Lifts the status & countdown section safely above the bottom corners */
+  }
+}
+
+/* 2560px Ceiling Constraint:
+   Prevents elements from over-bloating on ultra-wide / 4K displays. */
+@media (min-width: 1921px) {
+  .uc-hero-svg {
+    max-width: 1126px !important;
+  }
+}
