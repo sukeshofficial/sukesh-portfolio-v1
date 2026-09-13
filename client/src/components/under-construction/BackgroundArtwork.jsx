@@ -26,7 +26,7 @@ export default function BackgroundArtwork() {
         alt=""
         className="hidden md:block w-full h-full object-cover object-center select-none pointer-events-none"
         draggable="false"
-        fetchpriority="high"
+        fetchPriority="high"
       />
 
       {/* Portrait — shown below md */}
@@ -35,7 +35,7 @@ export default function BackgroundArtwork() {
         alt=""
         className="md:hidden w-full h-full object-cover object-center select-none pointer-events-none"
         draggable="false"
-        fetchpriority="high"
+        fetchPriority="high"
       />
     </div>
   );

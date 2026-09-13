@@ -10,6 +10,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800;1,900&display=swap" rel="stylesheet" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MMM8K0NW0D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+
+      // Set default consent to 'denied'
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'wait_for_update': 500
+      });
+
+      gtag('js', new Date());
+      gtag('config', 'G-MMM8K0NW0D', {
+        'cookie_expires': 63072000, // 2 years (persists in browser storage until cleared)
+        'cookie_update': true
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
