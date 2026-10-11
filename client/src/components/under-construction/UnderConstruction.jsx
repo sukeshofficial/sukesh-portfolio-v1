@@ -13,7 +13,9 @@ import LaunchDate from "./LaunchDate";
  * Single Viewport Poster Layout (100dvh).
  * Corner placement globally for Time and Launch Date.
  */
-export default function UnderConstruction() {
+export default function UnderConstruction({ clicksCount = 0 }) {
+  const remainingClicks = 10 - clicksCount;
+
   return (
     <main
       className="relative w-full h-[100dvh] max-h-[100dvh] overflow-hidden bg-black text-neutral-100 select-none"
@@ -58,6 +60,15 @@ export default function UnderConstruction() {
         <div className="absolute bottom-4 left-4 xs:bottom-5 xs:left-6 xl:bottom-8 xl:left-12 pointer-events-auto">
           <CurrentTime />
         </div>
+
+        {/* Bottom Center: Remaining clicks info hint */}
+        {clicksCount > 0 && remainingClicks > 0 && (
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 xs:bottom-5 xl:bottom-8 pointer-events-auto z-20">
+            <div className="px-3 py-1 rounded-full bg-neutral-900/80 backdrop-blur-md border border-neutral-700/60 shadow-lg text-xs font-mono tracking-wider text-neutral-300 animate-pulse">
+              <span>{remainingClicks} {remainingClicks === 1 ? "more click" : "more clicks"}</span>
+            </div>
+          </div>
+        )}
 
         <div className="absolute bottom-4 right-4 xs:bottom-5 xs:right-6 xl:bottom-8 xl:right-12 text-right pointer-events-auto">
           <LaunchDate />

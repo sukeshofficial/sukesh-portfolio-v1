@@ -11,7 +11,8 @@ import { WorkspaceProvider } from './context/WorkspaceContext.jsx'
 function AppContent() {
   const [showLoader, setShowLoader] = useState(true)
   const [contentVisible, setContentVisible] = useState(false)
-
+  const [underConstructionClicks, setUnderConstructionClicks] = useState(0);
+  const showWorkspace = underConstructionClicks >= 10;
   useEffect(() => {
     initializeConsent()
   }, [])
@@ -33,8 +34,17 @@ function AppContent() {
           transition: 'opacity 0.6s ease',
         }}
       >
-        <UnderConstruction />
-        {/* <WorkspaceLayout /> */}
+        {!showWorkspace ? (
+          <div
+            onClick={() =>
+              setUnderConstructionClicks((prev) => prev + 1)
+            }
+          >
+            <UnderConstruction clicksCount={underConstructionClicks} />
+          </div>
+        ) : (
+          <WorkspaceLayout />
+        )}
         <CookieConsent />
       </main>
     </>
