@@ -17,7 +17,8 @@ export default function ComponentTray({ selectedModuleId, onSelectModule }) {
   };
 
   return (
-    <aside className="w-full xl:w-72 2xl:w-80 flex-shrink-0 flex flex-col bg-[var(--pp-surface)]/70 backdrop-blur-md border-b xl:border-b-0 xl:border-r border-[var(--pp-border)] transition-colors duration-300">
+
+    <aside className="w-full xl:w-72 2xl:w-80 xl:h-dvh xl:max-h-dvh xl:min-h-0 flex-shrink-0 flex flex-col overflow-hidden bg-[var(--pp-surface)]/70 backdrop-blur-md border-b xl:border-b-0 xl:border-r border-[var(--pp-border)] transition-colors duration-300">
       {/* Tray header */}
       <div className="px-4 py-2.5 sm:py-3 border-b border-[var(--pp-border)] flex items-center justify-between flex-shrink-0">
         <div>
@@ -34,7 +35,9 @@ export default function ComponentTray({ selectedModuleId, onSelectModule }) {
       </div>
 
       {/* Module list — responsive horizontal scroll strip on mobile & tablet, vertical column on desktop */}
-      <div className="flex-1 overflow-x-auto xl:overflow-y-auto xl:overflow-x-hidden p-2.5 sm:p-3 flex xl:flex-col gap-2.5 sm:gap-3 scrollbar-thin scroll-smooth snap-x sm:snap-none">
+
+      <div className="flex-1 min-h-0 overflow-x-auto xl:overflow-y-auto xl:overflow-x-hidden p-2.5 sm:p-3 flex xl:flex-col gap-2.5 sm:gap-3 scrollbar-thin scroll-smooth snap-x sm:snap-none">
+
         {modules.map((module) => {
           const IconComponent = ICON_MAP[module.icon] || HelpCircle;
           const isPlaced = placements[module.id]?.isPlaced;
@@ -61,10 +64,10 @@ export default function ComponentTray({ selectedModuleId, onSelectModule }) {
                 }
               }}
               className={`w-[82vw] max-w-[280px] sm:w-64 sm:max-w-none xl:w-full flex-shrink-0 snap-start text-left p-3 rounded-xl border transition-all duration-200 group select-none ${isPlaced
-                  ? "bg-transparent border-[var(--pp-border)]/40 opacity-50 cursor-not-allowed"
-                  : isSelected
-                    ? "bg-[var(--pp-surface-secondary)] border-[var(--pp-primary)] shadow-sm ring-1 ring-[var(--pp-primary)]/25 cursor-grab"
-                    : "bg-[var(--pp-surface)]/80 hover:bg-[var(--pp-surface-secondary)]/60 border-[var(--pp-border)] cursor-grab active:cursor-grabbing hover:border-[var(--pp-text-muted)]/30"
+                ? "bg-transparent border-[var(--pp-border)]/40 opacity-50 cursor-not-allowed"
+                : isSelected
+                  ? "bg-[var(--pp-surface-secondary)] border-[var(--pp-primary)] shadow-sm ring-1 ring-[var(--pp-primary)]/25 cursor-grab"
+                  : "bg-[var(--pp-surface)]/80 hover:bg-[var(--pp-surface-secondary)]/60 border-[var(--pp-border)] cursor-grab active:cursor-grabbing hover:border-[var(--pp-text-muted)]/30"
                 }`}
             >
               <div className="flex items-center gap-2.5">
@@ -75,8 +78,8 @@ export default function ComponentTray({ selectedModuleId, onSelectModule }) {
 
                 <div
                   className={`flex-shrink-0 p-1.5 sm:p-2 rounded-lg border transition-colors ${isPlaced
-                      ? "bg-[var(--pp-surface-secondary)] border-[var(--pp-border)] text-[var(--pp-text-muted)]"
-                      : "bg-[var(--pp-primary-subtle)] border-[var(--pp-primary)]/20 text-[var(--pp-primary)]"
+                    ? "bg-[var(--pp-surface-secondary)] border-[var(--pp-border)] text-[var(--pp-text-muted)]"
+                    : "bg-[var(--pp-primary-subtle)] border-[var(--pp-primary)]/20 text-[var(--pp-primary)]"
                     }`}
                 >
                   <IconComponent className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
